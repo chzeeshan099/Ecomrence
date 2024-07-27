@@ -96,18 +96,21 @@
 }
 .logoutPortel{
   background-color:var(--lightWhite);
+  background-color: var(--colorWhite);
   color: var(--black);
-  width: 100px;
+  width: 130px;
   right: 0%;
+  left: 29.4%;
   cursor: pointer;
-  /* bottom:0%; */
 }
 .logoutPortel button{
   background-color: var(--black);
   color: var(--colorWhite);
 }
+.iconDiv{
+  width: 150px;
+}
 .iconDiv img {
-  margin: 0px 25px;
   cursor: pointer;
 }
 .tokriDiv img{
@@ -116,7 +119,7 @@
 .tokriDiv p {
   cursor: pointer;
   top: 0px;
-  left: 45px;
+  left:20px;
   background-color:var(--black);
   color:var(--colorWhite);
   padding: 0px 5px;
@@ -140,11 +143,6 @@
 @media screen and (max-width:1070px) {
   .navLink a {
     padding: 0px 20px;
-  }
-
-  .iconDiv img {
-    margin: 0px 15px;
-
   }
 }
 
@@ -177,16 +175,16 @@
     width: 100%;
     background-color:var(--colorWhite);
   }
-
+  .logoutPortel{
+    left:75%;
+  }
 }
 @media screen and (max-width:400px) { 
-  .iconDiv img {
-    margin: 0px 2px;
+  .iconDiv{
+    width: 100px;
   }
-  .tokriDiv p {
-    left: 13px;
-    padding: 0px 6px;
-    font-size: var(--fontSize10);
+  .logoutPortel{
+    left:25%;
   }
 }
 
@@ -716,7 +714,8 @@
 .cardTokri p {
   left: 20px;
   top: -15px;
-  background-color: red;
+  background-color:var(--black);
+  color: var(--colorWhite);
   padding: 0px 8px;
   border-radius: 100px;
 }
@@ -1283,7 +1282,8 @@ input:focus {
 .cardTokri p {
   left: 20px;
   top: -15px;
-  background-color: red;
+  background-color:var(--black);
+  color: var(--colorWhite);
   padding: 0px 8px;
   border-radius: 100px;
 }

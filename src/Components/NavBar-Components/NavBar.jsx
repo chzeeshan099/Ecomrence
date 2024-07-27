@@ -9,7 +9,10 @@ import logo from "../../imgs/Logo.svg";
 import Burger from '../../imgs/Burger.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaArrowRightFromBracket } from "react-icons/fa6";
-
+import { FaRegUser } from "react-icons/fa6";
+import { IoSettingsOutline } from "react-icons/io5";
+import { FaInfo } from "react-icons/fa6";
+import { IoHelpCircleOutline } from "react-icons/io5";
 
 const NavBar = () => {
     const [show, setShow] = useState(false);
@@ -70,7 +73,7 @@ const NavBar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-    const logout=()=>{
+    const logout = () => {
         localStorage.removeItem('token')
         navigate('/');
     }
@@ -120,23 +123,27 @@ const NavBar = () => {
                     <a href="#">Contact us</a>
                     <a href="#">Blog</a>
                 </div>
-                <div className='iconDiv position-relative'>
+                <div className='position-relative'>
+                <div className='iconDiv d-flex align-items-center justify-content-around'>
                     <img src={heart} alt="Heart" />
                     <div className='d-inline-block position-relative py-2 tokriDiv' onClick={handleCartClick}>
                         <img src={tokri} alt="Cart" />
                         <p className='position-absolute'>{cardCounter}</p>
                     </div>
-                    <img src={boy} alt="User" onClick={()=>setShowPortel(!showProtel)}/>
+                    <img src={boy} alt="User" onClick={() => setShowPortel(!showProtel)} />
+                </div>
                     {
-                        showProtel&&(
-                            <div className='position-absolute py-2 rounded-4 logoutPortel d-flex flex-column align-items-center justify-content-center'>
-                        <p>zeeshan</p>
-                        <h6 onClick={logout}>log out <FaArrowRightFromBracket /></h6>  
-                        {/* <button className='px-3 py-1 border-0 rounded-4' onClick={logout}>Log out</button> */}
-                    </div>
+                        showProtel && (
+                            <div className='position-absolute py-2 rounded-4 logoutPortel pt-4'>         
+                                <h6><FaRegUser className='mx-2'/> Profile</h6>
+                                <h6><IoSettingsOutline className='mx-2 my-2'/> Setting</h6>
+                                <h6><FaInfo className='mx-2'/> Information</h6>
+                                <h6><IoHelpCircleOutline className='mx-2 my-2'/> Help</h6>
+                                <h6 onClick={logout}><FaArrowRightFromBracket className='mx-2'/> log out</h6>
+                            </div>
                         )
                     }
-                </div>
+                    </div>
                 <div className='burgerDiv'>
                     <img src={Burger} alt="Menu" onClick={() => setShow(!show)} />
                 </div>
