@@ -68,3 +68,7 @@ export const shipingMethod = (data) => ({
     type: 'SET_SHIPING_METHOD',
     payload: data,
   });
+export const acces_tokken = (data) => ({
+    type: 'TOKKEN',
+    payload: data,
+  });

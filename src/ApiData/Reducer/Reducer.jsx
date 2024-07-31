@@ -140,3 +140,19 @@ export const shipingMethodReducer = (state = initialState8, action) => {
       return state;
   }
 };
+
+/////////////// 
+const initialState9 = {
+  tokken: {},
+};
+export const tokenReducer = (state = initialState9, action) => {
+  switch (action.type) {
+    case 'TOKKEN':
+      return {
+        ...state,
+        tokken: action.payload,
+      };
+    default:
+      return state;
+  }
+};

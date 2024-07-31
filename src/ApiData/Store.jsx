@@ -6,7 +6,7 @@ import rootReducer from './Reducer/Index';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['addToCartReducer', 'induadialAddToCartReducer', 'cardReducer', 'currentCardReducer','addressReducer','addressIdReducer','shipingMethodReducer','summeryTotalReducer'],
+  whitelist: ['addToCartReducer', 'induadialAddToCartReducer', 'cardReducer', 'currentCardReducer','addressReducer','addressIdReducer','shipingMethodReducer','summeryTotalReducer','tokenReducer'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

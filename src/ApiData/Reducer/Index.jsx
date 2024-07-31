@@ -8,6 +8,7 @@ import { addressReducer } from './Reducer';
 import { addressIdReducer } from './Reducer';
 import { shipingMethodReducer } from './Reducer';
 import { summeryTotalReducer } from './Reducer';
+import { tokenReducer } from './Reducer';
 
 const rootReducer = combineReducers({
     storeApiReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     addressReducer,
     addressIdReducer,
     shipingMethodReducer,
+    tokenReducer,
 });
 
 export default rootReducer;

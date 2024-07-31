@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
@@ -12,12 +13,55 @@ import { FaGoogle } from "react-icons/fa";
 import { SiMicrosoft } from "react-icons/si";
 import { ImFacebook2 } from "react-icons/im";
 import { FaLinkedin } from "react-icons/fa";
+import { FaApple } from "react-icons/fa6";
+import { supabase } from './SupabaseClient';
+import { useSelector,useDispatch } from 'react-redux';
+import {acces_tokken} from '../ApiData/Action/Index'
 
 const Login = () => {
     const [forget, setForget] = useState(false);
     const [openEye, setOpenEye] = useState(false);
+    const [provider, setProvider] = useState('');
+    const dispatch=useDispatch()
+    const showToken = useSelector(state => state.tokenReducer.tokken);
     const navigate = useNavigate();
     const { instance } = useMsal();
+
+    // const router = useRouter();
+    
+    useEffect(() => {
+
+        console.log('user effect call')
+        console.log(provider, 'procvider')
+        if(provider =='facebook') {
+            handleFacebookAuth()
+        }
+            
+      
+    }, [navigate]);
+
+    const handleFacebookAuth = async ( ) => {
+        console.log('handle facebook ...')
+        const hash = window.location.hash.substring(1);
+        console.log(hash, 'hash')
+          const query = new URLSearchParams(hash);
+          console.log(query, 'query')
+        //   const token = query.get('provider_token'); 
+
+          const regex = /provider_token=([^&]+)/;
+          const match = query?.match(regex);
+          const token =  match ? match[1] : null;
+    
+
+          console.log(token, 'token')
+
+        //   localStorage.setItem('tt', token)
+        //   console.log('Dispatching token:', token);
+        //   dispatch(acces_tokken(token));
+        //   console.log(showToken,'showToken')
+
+        
+    }
     
     const login = useGoogleLogin({
         onSuccess: tokenResponse => {
@@ -45,50 +89,82 @@ const Login = () => {
 
     const password = watch('password');
 
-    const handleMicrosoftLogin = () => {
-        instance.loginPopup().then(response => {
-            console.log(response);
-            // Handle successful login here
-            navigate('/home');
-        }).catch(error => {
-            console.error(error);
+    // const handleMicrosoftLogin = () => {
+    //     instance.loginPopup().then(response => {
+    //         console.log(response);
+    //         // Handle successful login here
+    //         navigate('/home');
+    //     }).catch(error => {
+    //         console.error(error);
+    //     });
+    // };
+
+    // const handleFacebookLogin = () => {
+    //     window.FB.login((response) => {
+    //         if (response.authResponse) {
+    //             console.log(response);
+    //             responseFacebook(response.authResponse);
+    //         } else {
+    //             console.log('User cancelled login or did not fully authorize.');
+    //         }
+    //     }, { scope: 'public_profile,email' });
+    // };
+    // const responseFacebook = (response) => {
+    //     console.log(response);
+    //     localStorage.setItem('token', response.accessToken);
+    //     navigate('/home');
+    // }
+
+    // useEffect(() => {
+    //     window.fbAsyncInit = function() {
+    //         window.FB.init({
+    //             appId: '846027550399023',
+    //             cookie: true,
+    //             xfbml: true,
+    //             version: 'v11.0'
+    //         });
+    //     };
+    //     (function(d, s, id){
+    //         var js, fjs = d.getElementsByTagName(s)[0];
+    //         if (d.getElementById(id)) { return; }
+    //         js = d.createElement(s); js.id = id;
+    //         js.src = "https://connect.facebook.net/en_US/sdk.js";
+    //         fjs.parentNode.insertBefore(js, fjs);
+    //     }(document, 'script', 'facebook-jssdk'));
+    // }, []);
+    // const handleAppleLogin = async () => {
+    //     const { error } = await supabase.auth.signInWithOAuth({
+    //         provider: 'apple',
+    //     });
+    
+    //     if (error) {
+    //         console.error('Error logging in with Apple:', error.message);
+    //     } else {
+    //         console.log('Logged in with Apple');
+    //         navigate('/home');
+    //     }
+    // };
+    const handleFacebookLogin = async () => {
+        const { error, data } = await supabase.auth.signInWithOAuth({
+          provider: 'facebook',
+          options: {
+            redirectTo: 'http://localhost:3000/'
+          }
         });
-    };
+        setProvider('facebook')
+      
+        if (error) console.error('Error logging in with Facebook:', error.message);
 
-    const handleFacebookLogin = () => {
-        window.FB.login((response) => {
-            if (response.authResponse) {
-                console.log(response);
-                responseFacebook(response.authResponse);
-            } else {
-                console.log('User cancelled login or did not fully authorize.');
-            }
-        }, { scope: 'public_profile,email' });
-    };
-    const responseFacebook = (response) => {
-        console.log(response);
-        localStorage.setItem('token', response.accessToken);
-        navigate('/home');
-    }
+      };
 
-    useEffect(() => {
-        window.fbAsyncInit = function() {
-            window.FB.init({
-                appId: '846027550399023',
-                cookie: true,
-                xfbml: true,
-                version: 'v11.0'
-            });
-        };
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    }, []);
-
+      const handleLinkedInLogin = async () => {
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider: 'linkedin',
+        });
+        if (error) {
+          console.error('Error with LinkedIn login:', error.message);
+        }
+      };
     return (
         <>
             <div className='w-100 loginDiv d-flex align-items-center justify-contet-between'>
@@ -161,9 +237,10 @@ const Login = () => {
                                         <p className='m-0'>Continue with Social Accounts</p>
                                         <div className='d-flex align-items-center justify-content-around'>
                                             <p className='loginIcon' onClick={() => login()}><FaGoogle /></p>
-                                            <p className='loginIcon' onClick={handleMicrosoftLogin}><SiMicrosoft /></p>
+                                            <p className='loginIcon'><SiMicrosoft /></p>
                                             <p className='loginIcon' onClick={handleFacebookLogin}><ImFacebook2 /></p>
-                                            <p className='loginIcon facebook' ><FaLinkedin /></p>
+                                            <p className='loginIcon facebook' onClick={handleLinkedInLogin}><FaLinkedin /></p>
+                                            <p className='loginIcon facebook'><FaApple /></p>
                                         </div>
                                     </div>
                                     </>
