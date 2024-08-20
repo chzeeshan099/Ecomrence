@@ -13,11 +13,11 @@ function App() {
     <Routes>
       <Route path='/' element={<Login />} />
       <Route element={<Protected />}>
-        <Route path='/home' element={<LandingPage />} />
-        <Route path='/productsPage' element={<ProductsPage />} />
-        <Route path='/productDetailPage' element={<ProductDetailPage />} />
-        <Route path='/addressPage' element={<AddressPage />} />
-        <Route path='/addtoCart' element={<AddToCartPage />} />
+        <Route path='/home' element={<LandingPage/>} />
+        <Route path='/productsPage' element={<ProductsPage/>} />
+        <Route path='/productDetailPage' element={<ProductDetailPage/>} />
+        <Route path='/addressPage' element={<AddressPage/>} />
+        <Route path='/addtoCart' element={<AddToCartPage/>} />
       </Route>
     </Routes>
   );
