@@ -92,22 +92,33 @@ export const currentCardReducer = (state = initialState5, action) => {
   }
 };
 ////////////// Adreess component ///////////
-const initialState6 ={
+const initialState6 = {
   addresses: [],
-  selectedAddressId: null
+  selectedAddressId: null,
 };
 
 export const addressReducer = (state = initialState6, action) => {
-    switch (action.type) {
-        case 'ADD_ADDRESS':
-            return [...state, action.payload];
-        case 'EDIT_ADDRESS':
-            return state.map(addr => (addr.id === action.payload.id ? action.payload : addr));
-        case 'DELETE_ADDRESS':
-            return state.filter(addr => addr.id !== action.payload);
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case 'ADD_ADDRESS':
+      return {
+        ...state,
+        addresses: [...state.addresses, action.payload],
+      };
+    case 'EDIT_ADDRESS':
+      return {
+        ...state,
+        addresses: state.addresses.map(addr => 
+          addr.id === action.payload.id ? action.payload : addr
+        ),
+      };
+    case 'DELETE_ADDRESS':
+      return {
+        ...state,
+        addresses: state.addresses.filter(addr => addr.id !== action.payload),
+      };
+    default:
+      return state;
+  }
 };
 const initialState7 = {
   number: 0,

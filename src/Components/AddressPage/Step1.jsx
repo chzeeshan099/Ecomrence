@@ -9,7 +9,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { addAddress, editAddress, deleteAddress, setAddressId } from '../../ApiData/Action/Index';
 
 const Step1 = ({ setCurrentStepIndex }) => {
-    const addresses = useSelector(state => state.addressReducer);
+    const addresses = useSelector(state => state.addressReducer.addresses);
     const addressId = useSelector(state => state.addressIdReducer.number);
     const dispatch = useDispatch();
     

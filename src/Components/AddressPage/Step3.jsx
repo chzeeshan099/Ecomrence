@@ -18,7 +18,7 @@ const Step3 = ({ setCurrentStepIndex }) => {
         ...product,
         totalPrice: (product.counter * product.price).toFixed(2),
     }));
-    const addresses = useSelector(state => state.addressReducer);
+    const addresses = useSelector(state => state.addressReducer.addresses);
     const addressId = useSelector(state => state.addressIdReducer.number);
     const matchingAddress = addresses.find(address => address.id === addressId);
     const step2DataPrice = useSelector(state => state.shipingMethodReducer.data) || {};
