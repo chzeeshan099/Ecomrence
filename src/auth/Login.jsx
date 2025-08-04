@@ -10,7 +10,7 @@ import arrow from '../imgs/arrow.svg';
 import iphone from '../imgs/tab.svg';
 import { FaGoogle } from "react-icons/fa";
 import { SiMicrosoft } from "react-icons/si";
-import { ImFacebook2 } from "react-icons/im";
+// import { ImFacebook2 } from "react-icons/im";
 import { FaLinkedin } from "react-icons/fa";
 
 const Login = () => {
@@ -55,39 +55,9 @@ const Login = () => {
         });
     };
 
-    const handleFacebookLogin = () => {
-        window.FB.login((response) => {
-            if (response.authResponse) {
-                console.log(response);
-                responseFacebook(response.authResponse);
-            } else {
-                console.log('User cancelled login or did not fully authorize.');
-            }
-        }, { scope: 'public_profile,email' });
-    };
-    const responseFacebook = (response) => {
-        console.log(response);
-        localStorage.setItem('token', response.accessToken);
-        navigate('/home');
-    }
+    // Facebook login logic removed
 
-    useEffect(() => {
-        window.fbAsyncInit = function() {
-            window.FB.init({
-                appId: '846027550399023',
-                cookie: true,
-                xfbml: true,
-                version: 'v11.0'
-            });
-        };
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    }, []);
+    // Facebook SDK logic removed
 
     return (
         <>
@@ -162,7 +132,7 @@ const Login = () => {
                                         <div className='d-flex align-items-center justify-content-around'>
                                             <p className='loginIcon' onClick={() => login()}><FaGoogle /></p>
                                             <p className='loginIcon' onClick={handleMicrosoftLogin}><SiMicrosoft /></p>
-                                            <p className='loginIcon' onClick={handleFacebookLogin}><ImFacebook2 /></p>
+                                            {/* Facebook login removed */}
                                             <p className='loginIcon facebook' ><FaLinkedin /></p>
                                         </div>
                                     </div>
