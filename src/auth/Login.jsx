@@ -9,7 +9,7 @@ import logo from '../imgs/Logo.svg';
 import arrow from '../imgs/arrow.svg';
 import iphone from '../imgs/tab.svg';
 import { FaGoogle } from "react-icons/fa";
-import { SiMicrosoft } from "react-icons/si";
+import { TfiMicrosoftAlt } from "react-icons/tfi";
 // import { ImFacebook2 } from "react-icons/im";
 import { FaLinkedin } from "react-icons/fa";
 
@@ -131,7 +131,7 @@ const Login = () => {
                                         <p className='m-0'>Continue with Social Accounts</p>
                                         <div className='d-flex align-items-center justify-content-around'>
                                             <p className='loginIcon' onClick={() => login()}><FaGoogle /></p>
-                                            <p className='loginIcon' onClick={handleMicrosoftLogin}><SiMicrosoft /></p>
+                                            <p className='loginIcon' onClick={handleMicrosoftLogin}><TfiMicrosoftAlt  /></p>
                                             {/* Facebook login removed */}
                                             <p className='loginIcon facebook' ><FaLinkedin /></p>
                                         </div>
